@@ -218,6 +218,9 @@ X, y, df = extract_featuresets('AMD')
 from sklearn import svm, cross_validation, neighbors
 from sklearn.ensemble import VotingClassifier, RandomForestClassifier
 
+"""
+Do machine Learning for 
+"""
 def do_ml(ticker):
     X, y, df = extract_featuresets(ticker)
     X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,
