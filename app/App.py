@@ -19,6 +19,25 @@ from matplotlib import style
 LARGE_FONT= ("Verdana", 12)
 style.use("ggplot")
 
+f = Figure(figsize=(5,5), dpi=100)
+a = f.add_subplot(111)
+
+
+def animate(i):
+    pullData = open("SampleData.txt", "r").read()
+    dataList = pullData.split('\n')
+    xList = []
+    yList = []
+    for eachline in dataList:
+        if len(eachline) > 1:
+            x, y = eachline.split(',')
+            xList.append(int(x))
+            yList.append(int(y))
+    a.clear()
+    a.plot(xList, yList)
+    
+
+    
 """
 The main App: 
 """
@@ -93,9 +112,9 @@ class PageThree(tk.Frame):
                             command=lambda: controller.show_frame(StartPage))
         button1.pack()   
         # plot data in background
-        f = Figure(figsize=(5,5), dpi=100)
-        a = f.add_subplot(111)
-        a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
+        #f = Figure(figsize=(5,5), dpi=100)
+        #a = f.add_subplot(111)
+        #a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
         
         #make plt.show() show up on canvas 
         canvas = FigureCanvasTkAgg(f, self)
@@ -115,5 +134,6 @@ def qf(quickPrint):
 
 
 app = StockApp()
+ani = animation.FuncAnimation(f, animate, interval=1000)
 app.mainloop()
         
